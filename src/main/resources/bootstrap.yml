@@ -1,0 +1,29 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
+info:
+  app:
+    name: Spring Boot Actuator Api transaction yanki
+    web: '*'
+  hello: Hi here!
+spring:
+  kafka:
+    consumer:
+      group-id: myGroup
+  data:
+    mongodb:
+      database: dbTransactionY
+      port: '27017'
+      host: localhost
+server:
+  port: 8084
+logging:
+  level:
+    root: info
