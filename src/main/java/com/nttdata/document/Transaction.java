@@ -12,10 +12,12 @@ import java.time.LocalDateTime;
 @Data
 @Document(collection = "transaction_yanki")
 public class Transaction {
+
 	@Id
 	private String id;
+    @Nullable
     private Integer typeAccountId;
-    private Integer clientId;
+    private String clientId;
     private String phone;
     @Nullable
     private String accountId;
