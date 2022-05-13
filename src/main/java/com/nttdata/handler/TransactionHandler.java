@@ -3,7 +3,6 @@ package com.nttdata.handler;
 import com.nttdata.message.KafkaSender;
 import com.nttdata.repository.TransactionRepository;
 import com.nttdata.document.Transaction;
-import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
