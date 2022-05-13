@@ -1,18 +1,13 @@
 package com.nttdata.message;
 
-import com.nttdata.document.BootCoinMovement;
-import com.nttdata.document.Transaction;
 import com.nttdata.events.Event;
-import com.nttdata.events.TransactionCreatedEvent;
+import com.nttdata.events.CreatedEvent;
 import com.nttdata.repository.TransactionRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Mono;
-
-import java.time.LocalDateTime;
 
 @Slf4j
 @AllArgsConstructor
@@ -21,18 +16,19 @@ public class KafkaConsumer {
 
     private final TransactionRepository transactionalRepository;
 
-    @KafkaListener(topics = "topic-bootcoinm", containerFactory = "kafkaListenerContainerFactory")
-    public void consumerTransactionBootCoin(Event<?> event) {
-        if (event.getClass().isAssignableFrom(TransactionCreatedEvent.class)) {
-            TransactionCreatedEvent customerCreatedEvent = (TransactionCreatedEvent) event;
-            log.info("Recibido.... data={}",  customerCreatedEvent.getData().toString());
+    @KafkaListener(topics = "topic-bootcoinm",groupId = "myGroup")
+    public void consumerTransactionBootCoin(String e) {
+        Event<?> event = null;
+        if (event.getClass().isAssignableFrom(CreatedEvent.class)) {
+            CreatedEvent createdEvent = (CreatedEvent) event;
+            log.info("Recibido.... data={}",  createdEvent.getData().toString());
 
-            var bm = customerCreatedEvent.getData();
-            if(bm.getPayMode()==2) addTransaction(bm);
+            var bm = createdEvent.getData();
+            //if(bm.getPayMode()==2) addTransaction(bm);
         }
     }
 
-    public void addTransaction(BootCoinMovement bm) {
+    /*public void addTransaction(BootCoinMovement bm) {
         Mono<Transaction> t = null;
 
         t.map(v -> {
@@ -47,5 +43,5 @@ public class KafkaConsumer {
             return transactionalRepository.save(v);
         });
 
-    }
+    }*/
 }

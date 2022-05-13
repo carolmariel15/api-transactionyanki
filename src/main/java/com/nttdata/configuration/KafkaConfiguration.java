@@ -1,6 +1,7 @@
 package com.nttdata.configuration;
 
 import com.nttdata.document.Transaction;
+import com.nttdata.events.CreatedEvent;
 import com.nttdata.events.Event;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -33,16 +34,13 @@ public class KafkaConfiguration {
         return new KafkaTemplate<>(producerFactoryJson());
     }
 
-    @Bean
+    /*@Bean
     public ConsumerFactory<String, Event<?>> consumerFactory() {
-        Map<String, String> props = new HashMap<>();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        props.put(JsonSerializer.TYPE_MAPPINGS,"com.nttdata:com.nttdata.events.Event");
+        Map<String, String> config = new HashMap<>();
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
 
         final JsonDeserializer<Event<?>> jsonDeserializer = new JsonDeserializer<>();
-        return new DefaultKafkaConsumerFactory(
-                props,
-                new StringDeserializer(),
+        return new DefaultKafkaConsumerFactory(config, new StringDeserializer(),
                 jsonDeserializer);
     }
 
@@ -53,6 +51,6 @@ public class KafkaConfiguration {
         factory.setConsumerFactory(consumerFactory());
 
         return factory;
-    }
+    }*/
 
 }

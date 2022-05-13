@@ -64,7 +64,7 @@ public class TransactionHandler {
 
     }
 
-    public Mono<Transaction> balance(Integer clientId, String phone) {
+    public Mono<Transaction> balance(String clientId, String phone) {
         var banlceFlux = transactionalRepository.findByClientIdAndPhone(clientId, phone);
         return banlceFlux.collectList()
                 .flatMap(transactions -> {

@@ -6,5 +6,5 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class TransactionCreatedEvent extends Event<BootCoinMovement> {
+public class CreatedEvent extends Event<BootCoinMovement> {
 }
